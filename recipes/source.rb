@@ -40,8 +40,10 @@ end
 if  node['platform_family'].eql? 'debian' and
   node['kernel']['machine'].eql? 'x86_64' and
   node['platform_version'].eql? '14.04'
-  link '/usr/include/gmp.h' do
-    to '/usr/include/x86_64-linux-gnu/gmp.h'
+  ["gmp.h", "libc-client.a"].each do |file|
+    link "/usr/include/#{file}" do
+      to "usr/include/x86_64-linux-gnu/#{file}"
+    end
   end
 end
 
