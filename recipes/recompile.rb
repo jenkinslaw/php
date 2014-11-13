@@ -21,6 +21,12 @@
 version = node['php']['version']
 configure_options = node['php']['configure_options'].join(' ')
 
+node['php']['src_deps'].each do |pkg|
+  package pkg do
+    action :install
+  end
+end
+
 bash 're-build php' do
   cwd Chef::Config[:file_cache_path]
   code <<-EOF
