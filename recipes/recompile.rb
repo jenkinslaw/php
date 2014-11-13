@@ -20,6 +20,7 @@
 
 version = node['php']['version']
 configure_options = node['php']['configure_options'].join(' ')
+ext_dir_prefix = node['php']['ext_dir'] ? "EXTENSION_DIR=#{node['php']['ext_dir']}" : ''
 
 node['php']['src_deps'].each do |pkg|
   package pkg do
